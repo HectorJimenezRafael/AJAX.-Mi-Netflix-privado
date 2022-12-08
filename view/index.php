@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="intro2.css">
+      <!-- Iconos Font Awesome -->
+      <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style/intro.css">
     <title>Document</title>
 </head>
 <body>
@@ -59,7 +61,11 @@
         <input type="text">
         <br>
         <br>
-        <input type="submit" value="Iniciar sesión">
+        <button class="boton con" type="submit">
+            <span class="sin_encima">Iniciar sesión <i class="fa-solid fa-door-closed"></i> </span>
+            <span  class="encima">Iniciar sesión <i class="fa-solid fa-door-open"></i> </span>
+        
+        </button>
         </form>
         </div>
             <span class="name_circle01"></span>
