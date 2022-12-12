@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="../style/intro.css">
     <title>Document</title>
 </head>
-<body>
 
 
+
 <body>
+    <audio id="audio" style="display:none;" controls autoplay >
+        <source src="../audio/intro_sonido.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="animation01">
         <div class="rhombus_small">
             <div class="rhombus">
@@ -52,18 +56,19 @@
             <div class="double_wrapper02 orange02"><div class="double_wrapper01 orange01"></div></div>
         </div>
         <div class="name">
-            <p style="text-align: center;">NETFLIX HÈCTOR</p>
+            <p style="text-align: center;">GO-VIDEO HÈCTOR</p>
             <div style="text-align: center;margin-top:300px;">
-            <form action="" method="post">
-        <input type="text">
+            
+       
         <br>
         <br>
-        <input type="text">
+       
         <br>
         <br>
+        <form action="principal.php">
         <button class="boton con" type="submit">
-            <span class="sin_encima">Iniciar sesión <i class="fa-solid fa-door-closed"></i> </span>
-            <span  class="encima">Iniciar sesión <i class="fa-solid fa-door-open"></i> </span>
+            <span class="sin_encima">ENTRAR <i class="fa-solid fa-door-closed"></i> </span>
+            <span  class="encima" >ENTRAR <i class="fa-solid fa-door-open"></i> </span>
         
         </button>
         </form>
@@ -72,6 +77,8 @@
             <span class="name_circle02"></span>
         </div>
     </div>
+
+<script src="../js/audio.js"></script>
 </body>
     
 </body>

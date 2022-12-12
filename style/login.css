@@ -1,0 +1,270 @@
+input {
+    cursor: pointer;
+}
+
+.bg-img {
+    z-index: 0;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    background-image: url('https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/07/Posters.png?fit=1200%2C900&quality=60&strip=all&ssl=1');
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form {
+    /* centering the form */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* sizing */
+    height: 630px;
+    width: 460px;
+    border-radius: 10px;
+    background-color: white;
+    /* --------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#login {
+    position: relative;
+    top: 120px;
+    left: 5px;
+    margin-bottom: 20px;
+    transition: all 0.5s ease-in-out;
+}
+
+#login-btn {
+    position: relative;
+    top: 160px;
+}
+
+#register {
+    position: relative;
+    top: -150px;
+    left: 450px;
+    transition: all 0.5s ease-in-out;
+}
+
+#register-btn {
+    position: relative;
+    top: 150px;
+}
+
+.username label,
+.password label,
+.email label {
+    color: rgb(130, 130, 130);
+    position: relative;
+    top: 30px;
+    right: 10px;
+    transition: all 0.3s ease-in;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px solid rgb(177, 177, 177);
+    position: relative;
+    left: -20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.input:focus {
+    outline: none;
+    border-bottom: 1px solid #f47141;
+    transition: all 0.2s ease;
+}
+
+.checkbox {
+    margin-bottom: 20px;
+}
+
+.toggle-btns {
+    z-index: 1;
+    position: absolute;
+    top: 20%;
+}
+
+#toggle {
+    position: absolute;
+    left: -5px;
+    z-index: 0;
+    width: 100px;
+    height: 45px;
+    background-color: #f47141;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: black;
+    border: 1px solid transparent;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50px;
+    width: 100px;
+    color: white;
+    position: relative;
+    left: -5px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.register-btn {
+    background-color: transparent;
+    font-size: 20px;
+    border: 1px solid transparent;
+    padding: 10px;
+    width: 100px;
+    position: relative;
+    left: 5px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.checkbox {
+    position: relative;
+    top: 10px;
+    left: -20px;
+    accent-color: #f47141;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 150px;
+    position: relative;
+    top: 50px;
+    left: 87px;
+}
+
+.form1-icons {
+    top: 42px;
+}
+
+.form2-icons {
+    top: 30px;
+}
+
+.social-icons button {
+    font-size: 25px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+ion-icon {
+    position: relative;
+    top: 2px;
+}
+
+.circle-1 {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    z-index: 0;
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 50px;
+}
+
+.logo-apple:hover>.circle-1 {
+    transform: scale(12);
+    background-color: black;
+    transition: transform 0.2s ease-in-out;
+}
+
+.logo-apple:hover ion-icon {
+    color: white;
+    transition: 0.3s ease-in;
+}
+
+.circle-2 {
+    position: absolute;
+    top: 15px;
+    left: 74px;
+    z-index: 0;
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 50px;
+}
+
+.logo-google:hover>.circle-2 {
+    transform: scale(12);
+    background-color: #db4437;
+    transition: transform 0.2s ease-in-out;
+}
+
+.logo-google:hover ion-icon {
+    color: white;
+    transition: 0.3s ease-in;
+}
+
+.circle-3 {
+    position: absolute;
+    top: 15px;
+    left: 124px;
+    z-index: 0;
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 50px;
+}
+
+.logo-facebook:hover>.circle-3 {
+    transform: scale(12);
+    background-color: #4267b2;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-facebook:hover ion-icon {
+    color: white;
+    transition: 0.3s ease-in;
+}
+
+.submit-btn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.submit-btn button {
+    font-size: 24px;
+    background-color: #f47141;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    width: 180px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.active {
+    color: #2691d9 !important;
+    top: 4px !important;
+    right: 14px !important;
+}
