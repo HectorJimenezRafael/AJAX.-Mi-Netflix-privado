@@ -2,7 +2,7 @@
 require_once '../conexion/conexion.php';
 
 
-$consulta = $pdo->prepare("SELECT * FROM `tbl_peli` ");
+$consulta = $pdo->prepare("SELECT p.id,p.titulo_peli,p.descripcion_peli,p.img_peli,c.nombre_cat FROM tbl_peli p INNER JOIN tbl_categoria c ON c.id=p.categoria; ");
 $consulta->execute();
 
 $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);

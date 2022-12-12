@@ -49,42 +49,66 @@
     </nav>
 
   
+                           <?php
+                           require_once '../conexion/conexion.php';
+                            $sql="SELECT * FROM tbl_categoria;";
 
+                            $query = $pdo->prepare($sql);
+
+                            $query->execute();
+
+                            $categorias = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+                            ?>
     <div class="row-c padding-m">
 
 
 <div class="column-2 padding-mobile"><div class="contact">
 			<h3 style="text-align: center;">PELICULA</h3>
 
-			<form id="contact-form">
+			<form action="" method="post" id="form_peli"  enctype="multipart/form-data">
 
 				<p>
+                <input type="hidden" name="idp" id="idp" value="">
 					<label>Título</label>
-					<input type="text" name="título" id="name" required>
+					<input type="text" name="titulo"  id="titulo" >
 				</p>
 
 				<p>
 					<label>Categoría</label>
-					<input type="text" name="company" id="company">
+					<!-- <input type="number" name="categoria" id="categoria"> -->
+
+                    <select name="categoria" id="categoria" >
+                                <?php
+                                foreach ( $categorias as $cat ) {
+                                    ?>
+                              <option value=<?php echo $cat['id']; ?>><?php echo $cat['nombre_cat'];  ?> </option>
+                               <?php
+                                }
+                                ?>
+                                   
+                                </select>
 				</p>
 
-				<p>
+				<!-- <p>
 					<label>E-mail Address</label>
-					<input type="email" name="email" id="email" required>
-				</p>
+					<input type="email" name="correo" id="correo" required>
+				</p> -->
 
 				<p>
-					<label>Phone Number</label>
-					<input type="text" name="phone" id="phone">
+					<label>Carátula</label>
+					<input type="file" name="imagen" id="imagen">
 				</p>
 
 				<p class="full">
 					<label>Descripción</label>
-					<textarea name="message" rows="5" id="message"></textarea>
+					<!-- <textarea name="descripcion" rows="5" id="descripcion"></textarea> -->
+                    <input type="text" name="descripcion" id="descripcion">
 				</p>
 
 				<p class="full">
-					<button type="submit">Registrar</button>
+                <input type="button" value="Registrar" id="registrar" class="btn btn-primary btn-block boton_in">
 				</p>
 
 			</form>

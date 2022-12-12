@@ -43,7 +43,7 @@
                             <a class="nav-link active " href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
                             </li>
                             <li class="nav-item">
-                             <a class="nav-link active " aria-current="page" href="./actividades.html">Usuarios <i class="fa-solid fa-users"></i></a>
+                             <a class="nav-link active " aria-current="page" href="./usuarios.php">Usuarios <i class="fa-solid fa-users"></i></a>
                             </li>
                             <?php
                         }

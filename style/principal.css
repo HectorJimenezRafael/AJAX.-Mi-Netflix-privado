@@ -27,6 +27,11 @@ body {
     background-size: cover;
     border-radius: 5px;
     height: 25vw;
+    transition: transform .2s;
+}
+
+.imagen_mediana:hover {
+    transform: scale(1.1);
 }
 
 .imagen_peque {
@@ -34,6 +39,11 @@ body {
     background-size: cover;
     border-radius: 5px;
     height: 15vw;
+    transition: transform .2s;
+}
+
+.imagen_peque:hover {
+    transform: scale(1.2);
 }
 
 img {

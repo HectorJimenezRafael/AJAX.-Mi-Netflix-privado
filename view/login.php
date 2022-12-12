@@ -68,11 +68,11 @@ if (isset($_SESSION['id'])) {
       <div class="form">
         <form action="../func/iniciar_sesion.php" method="POST" id="login">
           <div class="username">
-            <label id="user-label" for="username">Correo</label>
+            <label id="user-label" for="username">Correo <i class="fa-solid fa-envelope"></i></label>
             <input id="username" name="correo" class="input" type="text" required />
           </div>
           <div class="password">
-            <label id="pass-label" for="password">Contraseña</label>
+            <label id="pass-label" for="password">Contraseña <i class="fa-solid fa-key"></i></label>
             <input id="password" name="pass" class="input" type="password" required />
           </div>
           <!-- <div class="checkbox"><input type="checkbox" id="checkbox" /><label for="checkbox">Remember Me</label></div> -->
@@ -95,18 +95,18 @@ if (isset($_SESSION['id'])) {
           </div>
         </form>
 
-        <form action="" id="register">
+        <form action="../func/crear_usuario.php" method="POST" id="register">
           <div class="username">
-            <label id="user-label-reg" for="username">Username</label>
-            <input id="username-reg" class="input" type="text" required />
+            <label id="user-label-reg" for="username">Nombre de usuario <i class="fa-solid fa-person"></i></label>
+            <input id="username-reg" class="input" name="nombre" type="text" />
           </div>
           <div class="email">
-            <label id="email-label" for="email">Correo</label>
-            <input id="email" class="input" type="email" required />
+            <label id="email-label" for="email">Correo <i class="fa-solid fa-envelope"></i></label>
+            <input id="email" class="input" name="correo2" type="text"  />
           </div>
           <div class="password">
-            <label id="pass-label-reg" for="password">Contraseña</label>
-            <input id="password-reg" class="input" type="password" required />
+            <label id="pass-label-reg" for="password">Contraseña <i class="fa-solid fa-key"></i></label>
+            <input id="password-reg" class="input" name="pass2" type="text"  />
           </div>
           <div class="social-icons form2-icons">
             <div class="logo-apple">
@@ -181,6 +181,102 @@ Swal.fire({
 
 ?>
 
+
+    <!-- CREAR NUEVO USUARIO REGISTRO -->
+
+<!-- CAMPO VACIOS -->
+<?php
+if (isset($_GET['campos'])) {
+if ($_GET['campos']=='none') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS...',
+    text: 'Campos no rellenados'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+
+<!--ERROR DE FORMATO -->
+<?php
+if (isset($_GET['campos'])) {
+if ($_GET['campos']=='mal') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS...',
+    text: 'Formato incorrecto de los campos'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+<!--Ya existe este usuario -->
+<?php
+if (isset($_GET['cre'])) {
+if ($_GET['cre']=='rep') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS...',
+    text: 'Usuario no creado, este correo ya esta en uso'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+
+<!--CREACIÓN CORRECTA-->
+<?php
+if (isset($_GET['cre'])) {
+if ($_GET['cre']=='good') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'success',
+    title: 'Todo ha ido bien',
+    text: 'Espere a que el admin le habilite la cuenta'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
 
 </body>
 </html>
