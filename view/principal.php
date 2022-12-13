@@ -40,10 +40,10 @@
                     if (isset($_SESSION['id'])) {
                         if ($_SESSION['admin']==1) {
                             ?>
-                            <a class="nav-link active " href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
+                            <a class="nav-link active" style="text-align: center;" href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
                             </li>
                             <li class="nav-item">
-                             <a class="nav-link active " aria-current="page" href="./usuarios.php">Usuarios <i class="fa-solid fa-users"></i></a>
+                             <a class="nav-link active " style="text-align: center;" href="./usuarios.php">Usuarios <i class="fa-solid fa-users"></i></a>
                             </li>
                             <?php
                         }
@@ -79,7 +79,7 @@
 
        <!-- Top -->
        <div class="row-c padding-m">
-        <h4 class="column-1 padding-m">Top 5 <i class="fa-solid fa-ranking-star"></i></h4>
+        <h4 id="lol" class="column-1 padding-m">Top 5 <i class="fa-solid fa-ranking-star"></i></h4>
 
         <div  id="top5" class="column-1 padding-s">
             <!-- <div class="column-5 padding-s">
