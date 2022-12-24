@@ -101,6 +101,11 @@
 					<input type="file" name="imagen" id="imagen">
 				</p>
 
+                <p>
+					<label>Video</label>
+					<input type="file" name="video" id="video">
+				</p>
+
 				<p class="full">
 					<label>Descripción</label>
 					<!-- <textarea name="descripcion" rows="5" id="descripcion"></textarea> -->

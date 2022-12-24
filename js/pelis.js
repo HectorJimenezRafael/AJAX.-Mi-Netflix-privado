@@ -98,7 +98,7 @@ function ListarTodasPelis() {
                     // str += "</tr>";
 
                     str = "<div class='column-3 padding-mobile'>";
-                    str = str + "<img class='imagen_mediana' src=" + item.img_peli + "><p style='text-align:center;'>" + item.titulo_peli + "</p> <p style='text-align:center;'>Likes : " + item.peli_likes + " <i style='color:red;' class='fa-solid fa-heart opacidad'></i></p>";
+                    str = str + "<a href='pelicula.php?id_peli=" + item.id + "'><img class='imagen_mediana' src=" + item.img_peli + "></a><p style='text-align:center;'>" + item.titulo_peli + "</p> <p style='text-align:center;'>Likes : " + item.peli_likes + " <i style='color:red;' class='fa-solid fa-heart opacidad'></i></p>";
                     str = str + "<div style='text-align:center;';' class='padding-m'>";
                     str = str + "  <button class='btn btn-light m-1' onclick=" + "Fav(" + item.id + ") ><i class='fa-solid fa-plus opacidad'></i></button>";
                     str = str + "  <button id='" + item.id + "'  class='btn btn-light m-1' onclick=" + "Like(" + item.id + ")><i class='fa-solid fa-heart opacidad'></i></button>";

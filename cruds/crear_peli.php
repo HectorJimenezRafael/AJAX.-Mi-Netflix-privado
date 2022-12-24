@@ -15,7 +15,6 @@ $categoria=$_POST['categoria'];
 $descripcion=$_POST['descripcion'];
 
 
-
 $nombre_img = $_FILES['imagen']['name']; //obtenemos el nombre de la imagen
 $archivo = $_FILES['imagen']['tmp_name'];//archivo
 $tipo_archivo = $_FILES['imagen']['type'];//guardar el tipo del archivo
