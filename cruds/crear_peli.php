@@ -70,7 +70,7 @@ if (empty($_POST['idp'])){
         $id = $_POST['idp'];
         $nombre_img = $_FILES['imagen']['name']; //obtenemos el nombre de la imagen
          $archivo = $_FILES['imagen']['tmp_name'];//archivo
-        $ruta="../assets/img/mesas";
+        $ruta="../img";
         $ruta=$ruta."/".$nombre_img;
         $tipo_archivo = $_FILES['imagen']['type'];//guardar el tipo del archivo
         if ($tipo_archivo=="image/jpeg" || $tipo_archivo=="image/jpg" || $tipo_archivo=="image/png" || $tipo_archivo=="image/gif" || $tipo_archivo=="image/webp") {

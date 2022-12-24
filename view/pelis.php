@@ -64,8 +64,8 @@
     <div class="row-c padding-m">
 
 
-<div class="column-2 padding-mobile"><div class="contact">
-			<h3 style="text-align: center;">PELICULA</h3>
+<div class="column-2 padding-mobile"><div class="contact" style="text-align: center;">
+			<h3 style="text-align: center;">PELICULA <i class="fa-solid fa-clapperboard"></i></h3>
 
 			<form action="" method="post" id="form_peli"  enctype="multipart/form-data">
 
@@ -107,23 +107,38 @@
                     <input type="text" name="descripcion" id="descripcion">
 				</p>
 
+               
+
 				<p class="full">
                 <input type="button" value="Registrar" id="registrar" class="btn btn-primary btn-block boton_in">
 				</p>
 
+                
+				
+                
+
 			</form>
+            <br>
+            <p class="full">
+                <input type="button" onclick="reiniciar()" value="Reiniciar" id="reiniciar" class="btn btn-warning btn-block boton_in">
+				</p>
+            <br>
+          
+
 			<!-- End #contact-form -->
 		</div></div>
 
-<div class="column-2 padding-mobile"><table class="container">
+<div class="column-2 padding-mobile">
+<div class="table-wrapper">
+<table class="container">
 	<thead >
 		<tr>
-			<th ><h1>Id</h1></th>
+			<th ><h1 style="text-align: center;">Id</h1></th>
 			<th><h1 style="text-align: center;">Título</h1></th>
-			<th><h1>Carátula</h1></th>
-			<th><h1>Categoría</h1></th>
-            <th><h1>Editar</h1></th>
-            <th><h1>Eliminar</h1></th>
+			<th><h1 style="text-align: center;">Carátula</h1></th>
+			<th><h1 style="text-align: center;">Categoría</h1></th>
+            <th><h1 style="text-align: center;">Editar</h1></th>
+            <th><h1 style="text-align: center;">Eliminar</h1></th>
 		</tr>
 	</thead>
 	<tbody style="color:white"  id="resultado">
@@ -132,7 +147,7 @@
 
 
 
-</table></div>
+</table></div></div>
 
 
 

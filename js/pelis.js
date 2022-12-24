@@ -1,4 +1,5 @@
 ListarPelisTop('');
+color_likes('');
 
 function ListarPelisTop() {
 
@@ -100,7 +101,7 @@ function ListarTodasPelis() {
                     str = str + "<img class='imagen_mediana' src=" + item.img_peli + "><p style='text-align:center;'>" + item.titulo_peli + "</p> <p style='text-align:center;'>Likes : " + item.peli_likes + " <i style='color:red;' class='fa-solid fa-heart opacidad'></i></p>";
                     str = str + "<div style='text-align:center;';' class='padding-m'>";
                     str = str + "  <button class='btn btn-light m-1' onclick=" + "Fav(" + item.id + ") ><i class='fa-solid fa-plus opacidad'></i></button>";
-                    str = str + "  <button class='btn btn-light m-1' onclick=" + "Like(" + item.id + ")><i id=" + item.id + " class='fa-solid fa-heart opacidad'></i></button>";
+                    str = str + "  <button id='" + item.id + "'  class='btn btn-light m-1' onclick=" + "Like(" + item.id + ")><i class='fa-solid fa-heart opacidad'></i></button>";
 
                     str = str + "</div>";
                     str = str + "</div>";
@@ -108,6 +109,8 @@ function ListarTodasPelis() {
                     tabla += str;
                 });
                 resultado.innerHTML = tabla;
+
+                color_likes('');
             }
         } else {
             resultado.innerText = 'Error';
@@ -162,9 +165,25 @@ function Like(id) {
 
 
 function color_likes() {
-    document.getElementById("2").style.color = "red";
-}
 
-window.onload = function() {
-    color_likes('');
+    var formdata = new FormData();
+    var ajax = new XMLHttpRequest();
+    ajax.open('POST', '../func/likes_dados.php');
+    ajax.onload = function() {
+        if (ajax.status == 200) {
+            var json = JSON.parse(ajax.responseText);
+            json.forEach(function(item) {
+                document.getElementById(item.pelicula_fk).style.backgroundColor = "#CC0033";
+                document.getElementById(item.pelicula_fk).style.borderColor = "#CC0033";
+
+            })
+
+
+
+
+        }
+    }
+    ajax.send(formdata);
+
+
 }

@@ -2,7 +2,7 @@
 require_once '../conexion/conexion.php';
 
 
-$consulta = $pdo->prepare("SELECT * FROM `tbl_peli`");
+$consulta = $pdo->prepare("SELECT * FROM `tbl_peli` ORDER BY peli_likes DESC");
 $consulta->execute();
 
 $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);

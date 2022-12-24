@@ -1,3 +1,13 @@
+function reiniciar() {
+    // console.log("reiniciar")
+    var form = document.getElementById('form_peli');
+    form.reset();
+    document.getElementById('registrar').value = "Registrar";
+}
+
+
+
+
 ListarPelisCrud('');
 
 function ListarPelisCrud() {
@@ -37,7 +47,7 @@ function ListarPelisCrud() {
                     // str += "</td> ";
                     // str += "</tr>";
 
-                    str = "<tr><td>" + item.id + "</td>";
+                    str = "<tr><td  style='text-align: center;'>" + item.id + "</td>";
                     str = str + "<td style='text-align: center;'>" + item.titulo_peli + "</td>";
                     str += "<td>  <img style='width:60px;height:60px;' src=" + item.img_peli + " ></td>";
 

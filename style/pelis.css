@@ -76,7 +76,7 @@
 .contact form button,
 .contact form input,
 .contact form textarea {
-    width: 100%;
+    width: 90%;
     padding: 1em;
     border: solid 1px #627EDC;
     border-radius: 4px;
@@ -135,10 +135,16 @@
 .container {
     text-align: left;
     overflow: hidden;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
+    /* display: block; */
+}
+
+.table-wrapper {
+    overflow-y: scroll;
+    height: 475px;
 }
 
 .container td,
@@ -179,7 +185,7 @@
 
 .container td:hover {
     background-color: #FFF842;
-    color: #403E10;
+    color: #1e4656;
     font-weight: bold;
     box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
     transform: translate3d(6px, -6px, 0);
