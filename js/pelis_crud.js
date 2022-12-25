@@ -147,7 +147,7 @@ registrar.addEventListener("click", () => {
     ajax.onload = function() {
         if (ajax.status === 200) {
 
-            if (ajax.responseText == "ok") {
+            if (ajax.responseText == "okis") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Peli creada correctamente',
@@ -157,7 +157,7 @@ registrar.addEventListener("click", () => {
                     timerProgressBar: true,
                     timer: 3500
                 });
-                document.getElementById('registrar').value = "registrar";
+                document.getElementById('registrar').value = "Registrar";
                 form.reset();
                 ListarPelisCrud('');
             } else if (ajax.responseText == "campos_vacios") {
