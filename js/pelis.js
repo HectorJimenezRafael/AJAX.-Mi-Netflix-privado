@@ -1,5 +1,11 @@
-ListarPelisTop('');
-color_likes('');
+window.onload = function() {
+    // console.log('hola');
+    ListarPelisTop('');
+
+
+    ListarTodasPelis('', '', '');
+    // color_likes('');
+};
 
 function ListarPelisTop() {
 
@@ -58,15 +64,17 @@ function ListarPelisTop() {
 }
 
 
-ListarTodasPelis('');
 
-function ListarTodasPelis() {
+
+function ListarTodasPelis(buscar_nombre, buscar_categoria, buscar_likes) {
 
     var resultado = document.getElementById('pelis');
     //var frmbusqueda=document.getElementById('frmbusqueda');
     var formdata = new FormData();
+    formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_categoria', buscar_categoria);
+    formdata.append('buscar_likes', buscar_likes);
 
-    // formdata.append('buscar_nombre', buscar_nombre);
 
 
     var ajax = new XMLHttpRequest();
@@ -78,7 +86,7 @@ function ListarTodasPelis() {
                 console.log("ups");
                 var tabla = '';
                 resultado.innerHTML = tabla;
-                var error = "<br><p style='font-size:23px ; width: 100%;color:white;'>No se han encontado resultados. </p>";
+                var error = "<br><p style='font-size:23px ; width: 100%;color:white;text-align:center;'>No se han encontado resultados. </p>";
                 resultado.innerHTML = error;
 
             } else {
@@ -124,6 +132,48 @@ function ListarTodasPelis() {
 }
 
 
+
+// FILTRO
+buscar_nombre.addEventListener("keyup", () => {
+
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarTodasPelis('', '', '');
+    } else {
+        ListarTodasPelis(valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+buscar_categoria.addEventListener("change", () => {
+
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarTodasPelis('', '', '');
+    } else {
+        ListarTodasPelis(valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+
+buscar_likes.addEventListener("change", () => {
+
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+    if (buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarTodasPelis('', '', '');
+    } else {
+        ListarTodasPelis(valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+
 function Like(id) {
 
     var formdata = new FormData();
@@ -135,7 +185,7 @@ function Like(id) {
             if (ajax.responseText == "ok") {
 
                 // var json = JSON.parse(ajax.responseText);
-                ListarTodasPelis('');
+                ListarTodasPelis('', '', '');
 
             } else if (ajax.responseText == "sin_sesion") {
                 Swal.fire({
@@ -171,12 +221,17 @@ function color_likes() {
     ajax.open('POST', '../func/likes_dados.php');
     ajax.onload = function() {
         if (ajax.status == 200) {
-            var json = JSON.parse(ajax.responseText);
-            json.forEach(function(item) {
-                document.getElementById(item.pelicula_fk).style.backgroundColor = "#CC0033";
-                document.getElementById(item.pelicula_fk).style.borderColor = "#CC0033";
+            if (ajax.responseText == "sin_sesion") {
 
-            })
+            } else {
+                var json = JSON.parse(ajax.responseText);
+                json.forEach(function(item) {
+                    document.getElementById(item.pelicula_fk).style.backgroundColor = "#CC0033";
+                    document.getElementById(item.pelicula_fk).style.borderColor = "#CC0033";
+
+                })
+            }
+
 
 
 

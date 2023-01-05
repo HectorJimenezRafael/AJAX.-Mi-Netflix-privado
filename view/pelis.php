@@ -21,6 +21,20 @@
 </head>
 <body style=" background-image: url('https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/07/Posters.png?fit=1200%2C900&quality=60&strip=all&ssl=1');">
 
+
+
+<?php
+                    session_start();
+                    if (!isset($_SESSION['id'])) {
+                        echo "<script>window.location.href = '../view/principal.php';</script>";
+                    }
+
+
+                    if (!$_SESSION['admin']==1) {
+                        echo "<script>window.location.href = '../view/principal.php';</script>";
+                    }
+                    
+                ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="./intro.php">GO-VIDEO <i class="fa-solid fa-play"></i></a>

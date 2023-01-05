@@ -35,6 +35,7 @@ foreach ($resultado as $usu) {
     $correo_usu=$usu['correo'];
     $habilitado=$usu['habilitado'];
     $es_admin=$usu['admin'];
+    $perfil_foto=$usu['img_perfil'];
 }
 // var_dump($resultado);
 
@@ -53,6 +54,7 @@ if ($un_usuario==1) {
         // $_SESSION['habilitado'] = $habilitado;
 
         $_SESSION['admin'] = $es_admin;
+        $_SESSION['img_perfil'] = $perfil_foto;
 
         ?>
     <script>location.href = '../view/principal.php?sesion=true'</script>

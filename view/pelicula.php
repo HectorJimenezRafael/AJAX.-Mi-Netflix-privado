@@ -19,7 +19,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Pelicula</title>
 </head>
-<body >
+<body style="background-color: #f47141;;color:#17263D;" >
     
 
 
@@ -49,15 +49,21 @@
             </div>
         </div>
     </nav>
-
+    <?php
+                    session_start();
+                    if (!isset($_SESSION['id'])) {
+                        echo "<script>window.location.href = '../view/principal.php?sesion=no';</script>";
+                    }
+                    
+                ?>
     <?php
                            require_once '../conexion/conexion.php';
                            $id=$_GET['id_peli'];
 
-                            $sql="SELECT * FROM tbl_peli WHERE id=$id;";
+                            $sql="SELECT p.id,p.titulo_peli,p.descripcion_peli,p.img_peli,c.nombre_cat,p.peli_likes,p.video FROM tbl_peli p INNER JOIN tbl_categoria c ON c.id=p.categoria WHERE p.id=:id;";
 
                             $query = $pdo->prepare($sql);
-
+                            $query->bindParam(":id", $id);
                             $query->execute();
 
                             $pelicula = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -66,7 +72,7 @@
                                 $titulo=$peli['titulo_peli'];
                                 $descripcion=$peli['descripcion_peli'];
                                 $imagen=$peli['img_peli'];
-                                $categoria=$peli['categoria'];
+                                $categoria=$peli['nombre_cat'];
                                 $likes=$peli['peli_likes'];
                                 $video=$peli['video'];
                                 // echo $titulo;
@@ -89,6 +95,37 @@
     <iframe style="filter: opacity(95%);" width="560" height="315" src="https://www.youtube.com/embed/videoseries?hd1080&autoplay=1&controls=0&rel=0&amp;list=UUq6aw03lNILzV96UvEAASfQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 </div></div> <br><p style="color: white;"> <?php echo  $titulo?> </p></div><div style="background: black; width: 109px; height: 40px;"></div><div style="background: black; width: 459px; height: 80px; border-radius: 10px; padding-top: 10px"><button style="padding-left: 5px;" class="power" onclick="myFunction()"><span style="color: white; font-size: 50px;" class="material-symbols-outlined">power_settings_new</span></button></div></center>
 
+
+
+
+
+<br>
+
+<div  class="row-c" style="text-align: center;">
+
+<div class="column-3">
+<a style="font-size: 50px;color:#17263D" href="#openModal"><i class="fa-solid fa-circle-info"></i></a>
+
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<h1> Descripción <i class="fa-solid fa-clipboard"></i></h1>
+		<p><?php echo  $descripcion?></p>
+	</div>
+</div>
+
+
+</div>
+
+<div class="column-3">
+ <p style="font-size:50px;"> <?php echo  $likes?> <img style="width: 50px;height:50px;" src="../img/corazon.png" alt=""></p>  
+</div>
+
+<div class="column-3">
+<p style="font-size:50px;"> <?php echo  $categoria?> <i class="fa-solid fa-folder-open"></i></p>  
+</div>
+
+</div>
 
 
     <script src="../js/boton.js"></script>

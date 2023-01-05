@@ -24,11 +24,31 @@
 <body style="background-color: #f47141;;color:#17263D;">
 
 <?php
-
+session_start();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="./intro.php">GO-VIDEO <i class="fa-solid fa-play"></i></a>
+            <?php
+            if (isset($_SESSION['id'])) {
+                ?>
+            <a class="navbar-brand" href=""> 
+                <?php echo   "Bienvenid@ ".$_SESSION['nombre_usu'];  
+                ?>
+                 <?php
+                 $perfil_foto=$_SESSION['img_perfil'];
+    if ($_SESSION['img_perfil']=="") {
+        ?>
+ <img src="../img/sin_foto.jpg" class="img_perfil">
+           <?php
+    } else {
+       echo "<img src='$perfil_foto' class='img_perfil'>";
+    }
+     ?>
+            </a>
+            <?php
+        }
+        ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,8 +56,9 @@
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vh;">
                     <li class="nav-item">
                     <?php
-                    session_start();
+                    
                     if (isset($_SESSION['id'])) {
+                      
                         if ($_SESSION['admin']==1) {
                             ?>
                             <a class="nav-link active" style="text-align: center;" href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
@@ -46,9 +67,21 @@
                              <a class="nav-link active " style="text-align: center;" href="./usuarios.php">Usuarios <i class="fa-solid fa-users"></i></a>
                             </li>
                             <?php
+                        } elseif ($_SESSION['admin']==0) {
+                          $id_usuario= $_SESSION['id'];
+                            ?>
+                            <li class="nav-item">
+                            <?php
+                           echo "<a class='nav-link active ' style='text-align: center;' href='./perfil.php?id=$id_usuario'>Perfil <i class='fa-solid fa-user-pen'></i></a>"
+                            ?>
+                           </li>
+                           <?php
                         }
+                        // echo "  <li style='color:white;margin-top:7px;text-align: center; ' class='nav-item'>";
+                        // echo   "Bienvenido ".$_SESSION['nombre_usu'];
+                        // echo"</li>";
                     }
-                    
+                   
                 ?>
                                      
                 </ul>
@@ -76,9 +109,56 @@
         </div>
     </nav>
 
+    <?php
+            if (isset($_SESSION['id'])) {
+                ?>
 
+<!-- filtros -->
+<div class="row-c padding-m" id="form_filtro" style="text-align: center;">
+<div class="column-3">
+<input type="text" placeholder="Nombre" id="buscar_nombre" name="buscar_nombre">
+</div>
+<div class="column-3">
+    Favoritas
+<select name="buscar_likes" id="buscar_likes">
+    <option value="">Indiferente</option>
+    <option value=" <?php echo $_SESSION['id']; ?>">Si</option>
+    <option value="0">No</option>
+</select>
+</div>
+<div class="column-3">
+Categoría
+<select name="buscar_categoria" id="buscar_categoria" >
+   
+<option value="">Todas</option>
+                                <?php
+                                  require_once '../conexion/conexion.php';
+                                  $sql="SELECT * FROM tbl_categoria;";
+      
+                                  $query = $pdo->prepare($sql);
+      
+                                  $query->execute();
+      
+                                  $categorias = $query->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ( $categorias as $cat ) {
+                                    ?>
+                              <option value=<?php echo $cat['id']; ?>><?php echo $cat['nombre_cat'];  ?> </option>
+                               <?php
+                                }
+                                ?>
+                                   
+                                </select>
+</div>
+<?php
+            }
+?>
+
+<!-- fin filtros -->
+
+</div>
        <!-- Top -->
        <div class="row-c padding-m">
+
         <h4 id="lol" class="column-1 padding-m">Top 5 <i class="fa-solid fa-ranking-star"></i></h4>
 
         <div  id="top5" class="column-1 padding-s">
@@ -157,6 +237,34 @@ if ($_GET['sesion']=='true') {
 }
 
 ?>
+
+<!-- error -->
+<?php
+if (isset($_GET['sesion'])) {
+if ($_GET['sesion']=='no') {
+    ?>
+    <script>
+ Swal.fire({
+                            icon: 'error',
+                            title: 'UPS...',
+                            text:'Inicia sesión para ver nuestras películas',
+                            showConfirmButton: false,
+                            background: '#17263D',
+                            color: 'white',
+                            timerProgressBar: true,
+
+                            timer: 3500
+                        })
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+
+
     <script src="../js/pelis.js"></script>
 </body>
 </html>
