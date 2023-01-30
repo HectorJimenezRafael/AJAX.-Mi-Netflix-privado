@@ -8,15 +8,17 @@ function reiniciar() {
 
 
 
-ListarPelisCrud('');
+ListarPelisCrud('', '', '', '');
 
-function ListarPelisCrud() {
+function ListarPelisCrud(buscar_id, buscar_nombre, buscar_categoria, buscar_likes) {
 
     var resultado = document.getElementById('resultado');
     //var frmbusqueda=document.getElementById('frmbusqueda');
     var formdata = new FormData();
-
-    // formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_id', buscar_id);
+    formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_categoria', buscar_categoria);
+    formdata.append('buscar_likes', buscar_likes);
 
 
     var ajax = new XMLHttpRequest();
@@ -28,7 +30,7 @@ function ListarPelisCrud() {
                 console.log("ups");
                 var tabla = '';
                 resultado.innerHTML = tabla;
-                var error = "<br><p style='font-size:23px ; width: 100%;color:white;'>No se han encontado resultados. </p>";
+                var error = "<br><p style='font-size:23px ; width: 100%;color:orange;background-color:white;text-align: center;'>No se han encontado resultados. <i class='fa-solid fa-circle-exclamation'></i> </p>";
                 resultado.innerHTML = error;
 
             } else {
@@ -52,7 +54,7 @@ function ListarPelisCrud() {
                     str += "<td>  <img style='width:60px;height:60px;' src=" + item.img_peli + " ></td>";
 
                     str += "<td>" + item.nombre_cat + "</td>";
-
+                    str += "<td>" + item.peli_likes + " <i style='color:red;'  class='fa-solid fa-heart'></i></td>";
                     str += "<td>";
                     str = str + " <button type='button' style='background-color:#006d6d;' class='btn btn-success' onclick=" + "Editar(" + item.id + ")>Editar</button>";
                     str += "</td> ";
@@ -78,6 +80,64 @@ function ListarPelisCrud() {
 
 }
 
+
+
+// FILTRO
+buscar_id.addEventListener("keyup", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_id == "" || buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarPelisCrud('', '', '', '');
+    } else {
+        ListarPelisCrud(valor_id, valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+buscar_nombre.addEventListener("keyup", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_id == "" || buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarPelisCrud('', '', '', '');
+    } else {
+        ListarPelisCrud(valor_id, valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+buscar_categoria.addEventListener("change", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_id == "" || buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarPelisCrud('', '', '', '');
+    } else {
+        ListarPelisCrud(valor_id, valor_nombre, valor_categoria, valor_likes);
+    }
+});
+
+buscar_likes.addEventListener("change", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_categoria = buscar_categoria.value;
+    const valor_likes = buscar_likes.value;
+
+    if (buscar_id == "" || buscar_nombre == "" || buscar_categoria == "" || buscar_likes == "") {
+        ListarPelisCrud('', '', '', '');
+    } else {
+        ListarPelisCrud(valor_id, valor_nombre, valor_categoria, valor_likes);
+    }
+});
 
 
 
@@ -108,7 +168,7 @@ function Eliminar(id) {
                 if (ajax.status === 200) {
 
                     if (ajax.responseText == "ok") {
-                        ListarPelisCrud('');
+                        ListarPelisCrud('', '', '', '');
                         Swal.fire({
                             icon: 'success',
                             title: 'Peli eliminada correctamente',
@@ -159,7 +219,7 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarPelisCrud('');
+                ListarPelisCrud('', '', '', '');
             } else if (ajax.responseText == "campos_vacios") {
                 Swal.fire({
                     icon: 'error',
@@ -173,7 +233,7 @@ registrar.addEventListener("click", () => {
                     timer: 3500
                 });
 
-                ListarPelisCrud('');
+                ListarPelisCrud('', '', '', '');
             } else if (ajax.responseText == "formato_archivo_mal") {
                 Swal.fire({
                     icon: 'error',
@@ -187,7 +247,7 @@ registrar.addEventListener("click", () => {
                     timer: 3500
                 });
                 form.reset();
-                ListarPelisCrud('');
+                ListarPelisCrud('', '', '', '');
             } else if (ajax.responseText == "modificado") {
                 Swal.fire({
                     icon: 'success',
@@ -202,7 +262,9 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarPelisCrud('');
+                ListarPelisCrud('', '', '', '');
+            } else {
+                alert(ajax.responseText)
             }
         } else {
             respuesta_ajax.innerText = 'Error';

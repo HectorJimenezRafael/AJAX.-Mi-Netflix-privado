@@ -50,9 +50,42 @@
         </div>
     </nav>
     <?php
+    require_once '../conexion/conexion.php';
                     session_start();
                     if (!isset($_SESSION['id'])) {
                         echo "<script>window.location.href = '../view/principal.php?sesion=no';</script>";
+                    }
+
+
+                    $id_usuario=$_SESSION['id'];
+                    $id_peli=$_GET['id_peli'];
+
+                    $query = $pdo->prepare("SELECT * FROM `tbl_visitas` WHERE usuario_fk=:usu AND pelicula_fk=:peli ");
+                    $query->bindParam(":usu", $id_usuario);
+                    $query->bindParam(":peli", $id_peli);
+                    $query->execute();
+                    
+                    $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                    if (count($resultado)==0) {
+
+                        try {
+                            $pdo->beginTransaction();
+                            $query = $pdo->prepare("INSERT INTO `tbl_visitas` (`usuario_fk`, `pelicula_fk`) VALUES (:usu,:peli) ");
+                            $query->bindParam(":usu", $id_usuario);
+                            $query->bindParam(":peli", $id_peli);
+                            $query->execute();
+                        
+                            $query = $pdo->prepare("UPDATE `tbl_peli` SET peli_visitas=peli_visitas+1 WHERE id=:id");
+                            $query->bindParam(":id", $id_peli);
+                            $query->execute();
+                            echo "ok";
+                            
+                            $pdo->commit();
+                        } catch (Exception $e) {
+                            $pdo->rollBack();
+                            echo $e->getMessage();
+                        }
                     }
                     
                 ?>
@@ -67,17 +100,21 @@
                             $query->execute();
 
                             $pelicula = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach ( $pelicula as $peli ) {
-                                $titulo=$peli['titulo_peli'];
-                                $descripcion=$peli['descripcion_peli'];
-                                $imagen=$peli['img_peli'];
-                                $categoria=$peli['nombre_cat'];
-                                $likes=$peli['peli_likes'];
-                                $video=$peli['video'];
-                                // echo $titulo;
-                                // echo $imagen;
-                            }
+if ((count($pelicula))==0) {
+    echo "<script>window.location.href = '../view/not-found.php?';</script>";
+} else {
+    foreach ( $pelicula as $peli ) {
+        $titulo=$peli['titulo_peli'];
+        $descripcion=$peli['descripcion_peli'];
+        $imagen=$peli['img_peli'];
+        $categoria=$peli['nombre_cat'];
+        $likes=$peli['peli_likes'];
+        $video=$peli['video'];
+        // echo $titulo;
+        // echo $imagen;
+    }
+}
+                          
 
                             ?>
 
@@ -103,7 +140,7 @@
 
 <div  class="row-c" style="text-align: center;">
 
-<div class="column-3">
+<div class="column-33">
 <a style="font-size: 50px;color:#17263D" href="#openModal"><i class="fa-solid fa-circle-info"></i></a>
 
 <div id="openModal" class="modalDialog">
@@ -117,11 +154,11 @@
 
 </div>
 
-<div class="column-3">
+<div class="column-33">
  <p style="font-size:50px;"> <?php echo  $likes?> <img style="width: 50px;height:50px;" src="../img/corazon.png" alt=""></p>  
 </div>
 
-<div class="column-3">
+<div class="column-33">
 <p style="font-size:50px;"> <?php echo  $categoria?> <i class="fa-solid fa-folder-open"></i></p>  
 </div>
 

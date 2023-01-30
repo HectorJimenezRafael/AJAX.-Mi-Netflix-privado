@@ -50,6 +50,48 @@
                     <li class="nav-item">
                         <a class="nav-link active disabled" aria-current="page" href="./actividades.html">Usuarios <i class="fa-solid fa-users"></i></a>
                     </li> -->
+                    <?php
+                       require_once '../conexion/conexion.php';
+                    $consulta = $pdo->prepare("SELECT * FROM `tbl_usuarios` WHERE nuevo=1");
+                    $consulta->execute();
+                    
+                    $resultado =  $consulta->fetchAll(PDO::FETCH_ASSOC);
+                    $usuarios_new=count($resultado);
+                   
+                    if (isset($_SESSION['id'])) {
+                      
+                        if ($_SESSION['admin']==1) {
+                            ?> <div class="seccion" style='background-color:  #f47141;border-radius:100px;margin:8px'>
+                            <a class="nav-link active " style="text-align: center;" href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="seccion"  style='background-color: #f54121;border-radius:100px;margin:8px'>
+                             <a class="nav-link active " style="text-align: center;" href="./usuarios.php">Usuarios <i class="fa-solid fa-users-gear"></i></a>
+                             </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="seccion"  style='background-color: #f47141;border-radius:100px;margin:8px'>
+                             <a class="nav-link active " style="text-align: center;" href="./solicitudes.php">Solicitudes <i class="fa-solid fa-user-plus"></i> <?php if($usuarios_new>0){echo  " <span style='background-color: red;border-radius:100px;'>    $usuarios_new";}   ?></span></a>
+                             </div>
+                            </li>
+                            <?php
+                        } elseif ($_SESSION['admin']==0) {
+                          $id_usuario= $_SESSION['id'];
+                            ?>
+                            <li class="nav-item">
+                            <?php
+                           echo "<a class='nav-link active ' style='text-align: center;' href='./perfil.php?id=$id_usuario'>Perfil <i class='fa-solid fa-user-pen'></i></a>"
+                            ?>
+                           </li>
+                           <?php
+                        }
+                        // echo "  <li style='color:white;margin-top:7px;text-align: center; ' class='nav-item'>";
+                        // echo   "Bienvenido ".$_SESSION['nombre_usu'];
+                        // echo"</li>";
+                    }
+                   
+                ?>
                 </ul>
                 <form class="d-flex">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
@@ -144,6 +186,20 @@
 		</div></div>
 
 <div class="column-2 padding-mobile">
+
+<div class="column1" style="text-align: center;background-color:aliceblue;">
+<br>
+    <input style="width: 120px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
+    <input style="width: 120px;"  type="text" placeholder="Username"  name="buscar_nombre" id="buscar_nombre">
+    <input style="width: 120px;"  type="text" placeholder="Correo"  name="buscar_correo" id="buscar_correo">
+    <select name="buscar_estado" id="buscar_estado" style="margin-top: 5px;" >
+        <option value="">Estado <i class="fa-solid fa-arrow-down-z-a"></i></option>
+        <option value="1">Activo</option>
+        <option value="0">No activo</option>
+    </select>
+    <br>
+    <br>
+</div>
 <div class="table-wrapper">
 <table class="container">
 	<thead >

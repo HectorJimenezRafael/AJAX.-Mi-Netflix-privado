@@ -2,7 +2,7 @@
 require_once '../conexion/conexion.php';
 $data = $_POST['id'];
 
-
+session_start();
 
 
 if (!empty($_FILES['imagen']['name'])) {

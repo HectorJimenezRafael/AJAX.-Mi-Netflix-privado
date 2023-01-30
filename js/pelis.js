@@ -106,9 +106,9 @@ function ListarTodasPelis(buscar_nombre, buscar_categoria, buscar_likes) {
                     // str += "</tr>";
 
                     str = "<div class='column-3 padding-mobile'>";
-                    str = str + "<a href='pelicula.php?id_peli=" + item.id + "'><img class='imagen_mediana' src=" + item.img_peli + "></a><p style='text-align:center;'>" + item.titulo_peli + "</p> <p style='text-align:center;'>Likes : " + item.peli_likes + " <i style='color:red;' class='fa-solid fa-heart opacidad'></i></p>";
+                    str = str + "<a href='pelicula.php?id_peli=" + item.id + "'><img class='imagen_mediana' src=" + item.img_peli + "></a><p style='text-align:center;font-size:25px;'>" + item.titulo_peli + "</p> <p style='text-align:center;font-size:16px;'>Likes : " + item.peli_likes + " <i style='color:red;' class='fa-solid fa-heart opacidad'></i></p>";
                     str = str + "<div style='text-align:center;';' class='padding-m'>";
-                    str = str + "  <button class='btn btn-light m-1' onclick=" + "Fav(" + item.id + ") ><i class='fa-solid fa-plus opacidad'></i></button>";
+                    str = str + "  <button class='btn btn-light m-1' >" + item.peli_visitas + " <i class='fa-solid fa-eye'> </i></button > ";
                     str = str + "  <button id='" + item.id + "'  class='btn btn-light m-1' onclick=" + "Like(" + item.id + ")><i class='fa-solid fa-heart opacidad'></i></button>";
 
                     str = str + "</div>";
@@ -118,7 +118,7 @@ function ListarTodasPelis(buscar_nombre, buscar_categoria, buscar_likes) {
                 });
                 resultado.innerHTML = tabla;
 
-                color_likes('');
+                color_likes(buscar_nombre, buscar_categoria, buscar_likes);
             }
         } else {
             resultado.innerText = 'Error';
@@ -177,6 +177,7 @@ buscar_likes.addEventListener("change", () => {
 function Like(id) {
 
     var formdata = new FormData();
+
     formdata.append('id', id);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', '../func/like.php');
@@ -191,6 +192,17 @@ function Like(id) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Inicia sesión para Dar Likes',
+                    showConfirmButton: false,
+                    background: '#006d6d',
+                    color: 'white',
+                    timerProgressBar: true,
+
+                    timer: 3500
+                })
+            } else if (ajax.responseText == "admin") {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Recuerda eres admin, no puedes dar likes',
                     showConfirmButton: false,
                     background: '#006d6d',
                     color: 'white',
@@ -214,9 +226,12 @@ function Like(id) {
 
 
 
-function color_likes() {
+function color_likes(buscar_nombre, buscar_categoria, buscar_likes) {
 
     var formdata = new FormData();
+    formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_categoria', buscar_categoria);
+    formdata.append('buscar_likes', buscar_likes);
     var ajax = new XMLHttpRequest();
     ajax.open('POST', '../func/likes_dados.php');
     ajax.onload = function() {
@@ -226,8 +241,9 @@ function color_likes() {
             } else {
                 var json = JSON.parse(ajax.responseText);
                 json.forEach(function(item) {
-                    document.getElementById(item.pelicula_fk).style.backgroundColor = "#CC0033";
-                    document.getElementById(item.pelicula_fk).style.borderColor = "#CC0033";
+                    console.log(item.id)
+                    document.getElementById(item.id).style.backgroundColor = "#CC0033";
+                    document.getElementById(item.id).style.borderColor = "#CC0033";
 
                 })
             }

@@ -8,15 +8,17 @@ function reiniciar() {
 
 
 
-ListarUsuariosCrud('');
+ListarUsuariosCrud('', '', '', '');
 
-function ListarUsuariosCrud() {
+function ListarUsuariosCrud(buscar_id, buscar_nombre, buscar_correo, buscar_estado) {
 
     var resultado = document.getElementById('resultado');
     //var frmbusqueda=document.getElementById('frmbusqueda');
     var formdata = new FormData();
-
-    // formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_id', buscar_id);
+    formdata.append('buscar_nombre', buscar_nombre);
+    formdata.append('buscar_correo', buscar_correo);
+    formdata.append('buscar_estado', buscar_estado);
 
 
     var ajax = new XMLHttpRequest();
@@ -28,7 +30,7 @@ function ListarUsuariosCrud() {
                 console.log("ups");
                 var tabla = '';
                 resultado.innerHTML = tabla;
-                var error = "<br><p style='font-size:23px ; width: 100%;color:white;'>No se han encontado resultados. </p>";
+                var error = "<br><p style='font-size:23px ; width: 100%;color:orange;background-color:white;text-align: center;'>No se han encontado resultados. <i class='fa-solid fa-circle-exclamation'></i> </p>";
                 resultado.innerHTML = error;
 
             } else {
@@ -92,29 +94,114 @@ function ListarUsuariosCrud() {
 
 }
 
+
+
+// FILTRO
+buscar_id.addEventListener("keyup", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_correo = buscar_correo.value;
+    const valor_estado = buscar_estado.value;
+    if (buscar_id == "" || buscar_nombre == "" || buscar_correo == "" || buscar_estado == "") {
+        ListarUsuariosCrud('', '', '', '');
+    } else {
+        ListarUsuariosCrud(valor_id, valor_nombre, valor_correo, valor_estado);
+    }
+});
+
+
+buscar_nombre.addEventListener("keyup", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_correo = buscar_correo.value;
+    const valor_estado = buscar_estado.value;
+    if (buscar_id == "" || buscar_nombre == "" || buscar_correo == "" || buscar_estado == "") {
+        ListarUsuariosCrud('', '', '', '');
+    } else {
+        ListarUsuariosCrud(valor_id, valor_nombre, valor_correo, valor_estado);
+    }
+});
+
+
+buscar_correo.addEventListener("keyup", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_correo = buscar_correo.value;
+    const valor_estado = buscar_estado.value;
+    if (buscar_id == "" || buscar_nombre == "" || buscar_correo == "" || buscar_estado == "") {
+        ListarUsuariosCrud('', '', '', '');
+    } else {
+        ListarUsuariosCrud(valor_id, valor_nombre, valor_correo, valor_estado);
+    }
+});
+
+buscar_estado.addEventListener("change", () => {
+
+    const valor_id = buscar_id.value;
+    const valor_nombre = buscar_nombre.value;
+    const valor_correo = buscar_correo.value;
+    const valor_estado = buscar_estado.value;
+    if (buscar_id == "" || buscar_nombre == "" || buscar_correo == "" || buscar_estado == "") {
+        ListarUsuariosCrud('', '', '', '');
+    } else {
+        ListarUsuariosCrud(valor_id, valor_nombre, valor_correo, valor_estado);
+    }
+});
+
+
+
 // ESTADO
 function Estado(id) {
-    console.log("siuu");
+    // console.log("siuu");
+
+    Swal.fire({
+        title: '¿Quiere modicar el estado de este usuario?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3894a3',
+        cancelButtonColor: '#2f414F',
+        confirmButtonText: 'Si',
+        background: '#006d6d',
+        color: 'white',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var formdata = new FormData();
+            formdata.append('id', id);
+            var ajax = new XMLHttpRequest();
+            ajax.open('POST', '../cruds/estado_usuario.php');
+            ajax.onload = function() {
+                if (ajax.status == 200) {
+                    // var json = JSON.parse(ajax.responseText);
+                    if (ajax.responseText == "ok") {
 
 
-    var formdata = new FormData();
-    formdata.append('id', id);
-    var ajax = new XMLHttpRequest();
-    ajax.open('POST', '../cruds/estado_usuario.php');
-    ajax.onload = function() {
-        if (ajax.status == 200) {
-            // var json = JSON.parse(ajax.responseText);
-            if (ajax.responseText == "ok") {
-                // alert(json);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Estado de usuario modificado',
+                            showConfirmButton: false,
+                            background: '#006d6d',
+                            color: 'white',
+                            timerProgressBar: true,
 
-                // document.getElementById('lugar').value = json.id_lugar;
-                // document.getElementById('capacidad').value = json.capacidad;
+                            timer: 3500
+                        })
 
-                ListarUsuariosCrud('');
+                        // alert(json);
+
+                        // document.getElementById('lugar').value = json.id_lugar;
+                        // document.getElementById('capacidad').value = json.capacidad;
+
+                        ListarUsuariosCrud('', '', '', '');
+                    }
+                }
             }
+            ajax.send(formdata);
         }
-    }
-    ajax.send(formdata);
+    })
 
 }
 
@@ -144,7 +231,7 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarUsuariosCrud('');
+                ListarUsuariosCrud('', '', '', '');
             } else if (ajax.responseText == "vacio") {
                 Swal.fire({
                     icon: 'error',
@@ -158,7 +245,7 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarUsuariosCrud('');
+                ListarUsuariosCrud('', '', '', '');
             } else if (ajax.responseText == "mal_formato") {
                 Swal.fire({
                     icon: 'error',
@@ -172,7 +259,7 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarUsuariosCrud('');
+                ListarUsuariosCrud('', '', '', '');
             } else if (ajax.responseText == "repetido") {
                 Swal.fire({
                     icon: 'error',
@@ -186,7 +273,7 @@ registrar.addEventListener("click", () => {
                 });
                 document.getElementById('registrar').value = "Registrar";
                 form.reset();
-                ListarUsuariosCrud('');
+                ListarUsuariosCrud('', '', '', '');
             } else {
                 Swal.fire({
                     icon: 'success',
@@ -200,7 +287,7 @@ registrar.addEventListener("click", () => {
                 });
                 registrar.value = "Registrar";
                 idp.value = "";
-                ListarUsuariosCrud('');
+                ListarUsuariosCrud('', '', '', '');
                 form.reset();
             }
         } else {
@@ -238,7 +325,7 @@ function Eliminar(id) {
                 if (ajax.status === 200) {
 
                     if (ajax.responseText == "ok") {
-                        ListarUsuariosCrud('');
+                        ListarUsuariosCrud('', '', '', '');
                         Swal.fire({
                             icon: 'success',
                             title: 'Usuario eliminada correctamente',

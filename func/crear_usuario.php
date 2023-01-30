@@ -37,9 +37,10 @@ if (empty($_POST['nombre'])  || empty($_POST['correo2'])  || empty($_POST['pass2
 
 if ($existe==0) {
     $creacion=0;
+    $new=1;
 
-    $sql= "INSERT INTO `tbl_usuarios`( `nombre_usu`, `correo`, `contra`, `admin`, `habilitado`)
-     VALUES (:nombre,:correo,:contra,:adm,:ha)";
+    $sql= "INSERT INTO `tbl_usuarios`( `nombre_usu`, `correo`, `contra`, `admin`, `habilitado`,`nuevo`)
+     VALUES (:nombre,:correo,:contra,:adm,:ha,:new)";
 
     $stmt=$pdo->prepare($sql);
     $stmt->bindParam(':nombre',$nombre);
@@ -47,6 +48,7 @@ if ($existe==0) {
     $stmt->bindParam(':correo',$correo);
     $stmt->bindParam(':adm',$creacion);
     $stmt->bindParam(':ha',$creacion);
+    $stmt->bindParam(':new',$new);
 
 
     $stmt->execute();

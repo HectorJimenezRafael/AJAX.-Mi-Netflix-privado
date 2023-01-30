@@ -2,6 +2,10 @@
   require_once '../conexion/conexion.php';
 
     $id=$_POST['id'];
+
+
+
+    
     $query = $pdo->prepare("SELECT * FROM tbl_peli WHERE id = :id");
     $query->bindParam(":id", $id);
     $query->execute();

@@ -114,10 +114,10 @@ foreach ($resultado as $perfil) {
             <form action="../func/listar_foto.php" method="post" id="form_perfil"  enctype="multipart/form-data">
                 <input type="hidden" id="id" name="id" value="  <?php echo  $id ?>">
                
-<input type="file" id="imagen" name="imagen" class="file-select">
+<input type="file" id="imagen" name="imagen" class="file-select " >
 <br>
 <br>
-<input type="submit" id="cambiar" value="Cambiar Imagen">
+<input type="submit" id="cambiar" class="btn" value="Cambiar Imagen">
           </form>
 
           </h2>
@@ -127,7 +127,7 @@ foreach ($resultado as $perfil) {
   <!-- bit of a bio; who are you? -->
   <div class="profile-bio">
 
-    <p style="font-size: 23px;">
+    <p style="font-size: 18px;">
     <?php
     echo   "$perfil_correo <i class='fa-solid fa-square-envelope'></i>";
     echo "<br>";
@@ -151,11 +151,64 @@ echo "Te ha gustado <i class='fa-solid fa-heart'></i> <br> $likes_num película 
 
     ?>
     </p>
+    <br>
+    <p style="font-size: 18px;">  
+    <?php
+  
+$query = $pdo->prepare("SELECT * FROM `tbl_visitas` WHERE usuario_fk=:usu");
+$query->bindParam(":usu", $id_usu);
 
+$query->execute();
+
+$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+$comen_num=count($resultado);
+
+if ($comen_num==1) {
+
+echo "Y has visualizado <i class='fa-solid fa-eye'></i> <br> $comen_num película <i class='fa-solid fa-clapperboard'></i> ";
+} else {
+ 
+  echo "Y has visualizado <i class='fa-solid fa-eye'></i> <br> $comen_num películas <i class='fa-solid fa-clapperboard'></i>";
+}
+  ?>
+  
+  </p>
+<br>
+<br>
+<div class="espacio_contra" >
+<a class="pass" href="#openModal">
+   <span class="con1"  style="font-size: 20px;">Contraseña <i class="fa-solid fa-lock"></i></span>
+   <span class="con2"  style="font-size: 20px;">Contraseña <i class="fa-solid fa-lock-open"></i></span>
+
+</a>
+</div>
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<h1> Cambiar contraseña <i class="fa-solid fa-key"></i></h1>
+		<p> <form action="../func/update_contra.php" method="post">
+    <input type="text"  class="escribir_con"  name="correo" placeholder="Correo">
+    <br>
+    <br>
+
+    <input type="password"  class="escribir_con"  name="contra_antigua" placeholder="Contraseña actual">
+    <br>
+    <br>
+   
+    <input type="password"   class="escribir_con" name="contra_nueva" placeholder="Contraseña nueva">
+    <br>
+    <br>
+      <input class="btn" type="submit" value="Cambiar">
+    </form> </p>
+	</div>
+</div>
+
+
+</div>
   </div>
 
   <!-- some social links to show off -->
-  <ul class="profile-social-links">
+  <!-- <ul class="profile-social-links">
     <li>
       <a target="_blank" href="https://www.facebook.com/creativedonut">
         <i class="fa fa-facebook"></i>
@@ -177,7 +230,7 @@ echo "Te ha gustado <i class='fa-solid fa-heart'></i> <br> $likes_num película 
         <i class="fa fa-behance"></i>
       </a>
     </li>
-  </ul>
+  </ul> -->
 </aside>
 
 <!-- <script src="../js/perfil.js"></script> -->
@@ -233,5 +286,102 @@ if ($_GET['mal']=='si') {
 
 ?>
 
+
+
+<!-- sweetalert2 -->
+
+
+ <!-- ACCESO DENEGADO -->
+ <?php
+if (isset($_GET['en'])) {
+if ($_GET['en']=='no') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS...',
+    text: 'Acceso denegado'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+<!-- campos vacio -->
+<?php
+if (isset($_GET['vacio'])) {
+if ($_GET['vacio']=='true') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS...',
+    text: 'Campos vacíos'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+<!-- cambio correcto -->
+<?php
+if (isset($_GET['good'])) {
+if ($_GET['good']=='true') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'success',
+    title: 'TODO CORRECTO',
+    text: 'CAMBIO EJECUTADO'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
+
+
+<!-- cambio correcto -->
+<?php
+if (isset($_GET['mal'])) {
+if ($_GET['mal']=='true') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#486b7c',
+    color:'white',
+    icon: 'error',
+    title: 'UPS',
+    text: 'Este correo no se corresponde'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+
+?>
 
 </html>

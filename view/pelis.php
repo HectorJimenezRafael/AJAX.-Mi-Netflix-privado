@@ -50,6 +50,48 @@
                     <li class="nav-item">
                         <a class="nav-link active disabled" aria-current="page" href="./actividades.html">Usuarios <i class="fa-solid fa-users"></i></a>
                     </li> -->
+                    <?php
+                       require_once '../conexion/conexion.php';
+                    $consulta = $pdo->prepare("SELECT * FROM `tbl_usuarios` WHERE nuevo=1");
+                    $consulta->execute();
+                    
+                    $resultado =  $consulta->fetchAll(PDO::FETCH_ASSOC);
+                    $usuarios_new=count($resultado);
+                   
+                    if (isset($_SESSION['id'])) {
+                      
+                        if ($_SESSION['admin']==1) {
+                            ?> <div class="seccion" style='background-color:  #f54121;border-radius:100px;margin:8px'>
+                            <a class="nav-link active " style="text-align: center;" href="./pelis.php">Películas <i class="fa-solid fa-file-video"></i></a>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="seccion"  style='background-color: #f47141;border-radius:100px;margin:8px'>
+                             <a class="nav-link active " style="text-align: center;" href="./usuarios.php">Usuarios <i class="fa-solid fa-users-gear"></i></a>
+                             </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="seccion"  style='background-color: #f47141;border-radius:100px;margin:8px'>
+                             <a class="nav-link active " style="text-align: center;" href="./solicitudes.php">Solicitudes <i class="fa-solid fa-user-plus"></i> <?php if($usuarios_new>0){echo  " <span style='background-color: red;border-radius:100px;'>    $usuarios_new";}   ?></span></a>
+                             </div>
+                            </li>
+                            <?php
+                        } elseif ($_SESSION['admin']==0) {
+                          $id_usuario= $_SESSION['id'];
+                            ?>
+                            <li class="nav-item">
+                            <?php
+                           echo "<a class='nav-link active ' style='text-align: center;' href='./perfil.php?id=$id_usuario'>Perfil <i class='fa-solid fa-user-pen'></i></a>"
+                            ?>
+                           </li>
+                           <?php
+                        }
+                        // echo "  <li style='color:white;margin-top:7px;text-align: center; ' class='nav-item'>";
+                        // echo   "Bienvenido ".$_SESSION['nombre_usu'];
+                        // echo"</li>";
+                    }
+                   
+                ?>
                 </ul>
                 <form class="d-flex">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
@@ -148,6 +190,40 @@
 		</div></div>
 
 <div class="column-2 padding-mobile">
+<div class="column1" style="text-align: center;background-color:aliceblue;">
+<br>
+    <input style="width: 120px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
+    <input style="width: 120px;"  type="text" placeholder="Titulo"  name="buscar_nombre" id="buscar_nombre">
+
+    <select name="buscar_categoria" id="buscar_categoria" >
+   
+<option value="">Todas</option>
+                                <?php
+                                  require_once '../conexion/conexion.php';
+                                  $sql="SELECT * FROM tbl_categoria;";
+      
+                                  $query = $pdo->prepare($sql);
+      
+                                  $query->execute();
+      
+                                  $categorias = $query->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ( $categorias as $cat ) {
+                                    ?>
+                              <option value=<?php echo $cat['id']; ?>><?php echo $cat['nombre_cat'];  ?> </option>
+                               <?php
+                                }
+                                ?>
+                                   
+                                </select>
+                                <select style="margin-top: 10px;" name="buscar_likes" id="buscar_likes">
+                                    <option value="">Indiferente</option>
+                                   
+                                    <option value="1">Menos likes</option>
+                                    <option value="2">Más likes</option>
+                                </select>
+    <br>
+    <br>
+</div>
 <div class="table-wrapper">
 <table class="container">
 	<thead >
@@ -156,6 +232,7 @@
 			<th><h1 style="text-align: center;">Título</h1></th>
 			<th><h1 style="text-align: center;">Carátula</h1></th>
 			<th><h1 style="text-align: center;">Categoría</h1></th>
+            <th><h1 style="text-align: center;">Likes</h1></th>
             <th><h1 style="text-align: center;">Editar</h1></th>
             <th><h1 style="text-align: center;">Eliminar</h1></th>
 		</tr>
