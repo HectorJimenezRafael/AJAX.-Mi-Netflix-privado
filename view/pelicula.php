@@ -130,7 +130,7 @@ if ((count($pelicula))==0) {
 </video>
 <!-- 
     <iframe style="filter: opacity(95%);" width="560" height="315" src="https://www.youtube.com/embed/videoseries?hd1080&autoplay=1&controls=0&rel=0&amp;list=UUq6aw03lNILzV96UvEAASfQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-</div></div> <br><p style="color: white;"> <?php echo  $titulo?> </p></div><div style="background: black; width: 109px; height: 40px;"></div><div style="background: black; width: 459px; height: 80px; border-radius: 10px; padding-top: 10px"><button style="padding-left: 5px;" class="power" onclick="myFunction()"><span style="color: white; font-size: 50px;" class="material-symbols-outlined">power_settings_new</span></button></div></center>
+</div></div> <br><p style="color: white;font-size:25px;"> <?php echo  $titulo?> </p></div><div style="background: black; width: 109px; height: 40px;"></div><div style="background: black; width: 459px; height: 80px; border-radius: 10px; padding-top: 10px"><button style="padding-left: 5px;" class="power" onclick="myFunction()"><span style="color: white; font-size: 50px;" class="material-symbols-outlined">power_settings_new</span></button></div></center>
 
 
 

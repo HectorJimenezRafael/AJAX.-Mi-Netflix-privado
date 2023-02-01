@@ -19,7 +19,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Pelis</title>
 </head>
-<body style=" background-image: url('https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/07/Posters.png?fit=1200%2C900&quality=60&strip=all&ssl=1');">
+<body style=" background-image: url('https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/07/Posters.png?fit=1200%2C900&quality=60&strip=all&ssl=1');opacity:0.5px;">
 
 
 
@@ -135,7 +135,7 @@
 					<label>Categoría</label>
 					<!-- <input type="number" name="categoria" id="categoria"> -->
 
-                    <select name="categoria" id="categoria" >
+                    <select style="width: 91%;border:1px solid blue;height:55px;text-align:center;" name="categoria" id="categoria" >
                                 <?php
                                 foreach ( $categorias as $cat ) {
                                     ?>
@@ -192,12 +192,12 @@
 <div class="column-2 padding-mobile">
 <div class="column1" style="text-align: center;background-color:aliceblue;">
 <br>
-    <input style="width: 120px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
-    <input style="width: 120px;"  type="text" placeholder="Titulo"  name="buscar_nombre" id="buscar_nombre">
+    <input style="width: 120px; border-radius:30px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
+    <input style="width: 120px; border-radius:30px;"  type="text" placeholder="Titulo"  name="buscar_nombre" id="buscar_nombre">
 
-    <select name="buscar_categoria" id="buscar_categoria" >
+    <select style="border-radius:30px;" name="buscar_categoria" id="buscar_categoria" >
    
-<option value="">Todas</option>
+<option  value="">Todas</option>
                                 <?php
                                   require_once '../conexion/conexion.php';
                                   $sql="SELECT * FROM tbl_categoria;";
@@ -215,7 +215,7 @@
                                 ?>
                                    
                                 </select>
-                                <select style="margin-top: 10px;" name="buscar_likes" id="buscar_likes">
+                                <select style="margin-top: 10px;border-radius:30px;" name="buscar_likes" id="buscar_likes">
                                     <option value="">Indiferente</option>
                                    
                                     <option value="1">Menos likes</option>

@@ -127,15 +127,15 @@
 
 				<p>
                 <input type="hidden" name="idp" id="idp" value="">
-					<label>Username</label>
+					<label style="font-size:26px;">Username</label>
 					<input type="text" name="nombre"  id="nombre" >
 				</p>
 
 				<p>
-					<label>Estado</label>
+					<label style="font-size:26px;">Estado</label>
 					<!-- <input type="number" name="categoria" id="categoria"> -->
 
-                    <select name="estado" id="estado" >
+                    <select  style="width: 91%;border:1px solid blue;height:55px;text-align:center;"  name="estado" id="estado" >
                                
                               <option value="0">No activo </option>
                               <option value="1">Activo </option>
@@ -159,7 +159,7 @@
 				</p> -->
 
 				<p class="full">
-					<label>Correo</label>
+					<label style="font-size:26px;">Correo</label>
 					<!-- <textarea name="descripcion" rows="5" id="descripcion"></textarea> -->
                     <input type="text" name="correo" id="correo">
 				</p>
@@ -189,10 +189,10 @@
 
 <div class="column1" style="text-align: center;background-color:aliceblue;">
 <br>
-    <input style="width: 120px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
-    <input style="width: 120px;"  type="text" placeholder="Username"  name="buscar_nombre" id="buscar_nombre">
-    <input style="width: 120px;"  type="text" placeholder="Correo"  name="buscar_correo" id="buscar_correo">
-    <select name="buscar_estado" id="buscar_estado" style="margin-top: 5px;" >
+    <input style="width: 120px;border-radius:30px;" type="number" placeholder="Id" name="buscar_id" id="buscar_id">
+    <input style="width: 120px;border-radius:30px;"  type="text" placeholder="Username"  name="buscar_nombre" id="buscar_nombre">
+    <input style="width: 120px;border-radius:30px;"  type="text" placeholder="Correo"  name="buscar_correo" id="buscar_correo">
+    <select style="border-radius:30px;" name="buscar_estado" id="buscar_estado" style="margin-top: 5px;" >
         <option value="">Estado <i class="fa-solid fa-arrow-down-z-a"></i></option>
         <option value="1">Activo</option>
         <option value="0">No activo</option>
